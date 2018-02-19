@@ -27,7 +27,8 @@ define(function(require) {
   function createNewCourse() {
     var model = new CourseModel({
       title: Origin.l10n.t('app.placeholdernewcourse'),
-      displayTitle: Origin.l10n.t('app.placeholdernewcourse')
+      displayTitle: Origin.l10n.t('app.placeholdernewcourse'),
+      _isShared: true
     });
     EditorHelpers.setPageTitle({ title: Origin.l10n.t('app.editornew') });
     var form = Origin.scaffold.buildForm({ model: model });
