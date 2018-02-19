@@ -65,7 +65,7 @@ define(function(require) {
 		//Pretty print the object keys and values
 		var parts = [];
 		_.each(this.nestedSchema, function(schema, key) {
-			
+
 			var desc = schema.title ? schema.title : createTitle(key),
 			val = value[key];
 
@@ -93,33 +93,6 @@ define(function(require) {
 
 		return parts.join('<br />');
     };
-
-	Backbone.Form.editors.List.prototype.removeItem = function(item) {
-		//Confirm delete
-		var confirmMsg = this.schema.confirmDelete;
-
-		var remove = _.bind(function(isConfirmed) {
-			if (isConfirmed === false) return;
-
-			var index = _.indexOf(this.items, item);
-
-			this.items[index].remove();
-			this.items.splice(index, 1);
-
-			if (item.addEventTriggered) {
-				this.trigger('remove', this, item.editor);
-				this.trigger('change', this);
-			}
-
-			if (!this.items.length && !this.Editor.isAsync) this.addItem();
-		}, this);
-
-		if (confirmMsg) {
-			window.confirm({ title: confirmMsg, type: 'warning', callback: remove });
-		} else {
-			remove();
-		}
-	};
 
 	// Used to setValue with defaults
 
@@ -154,28 +127,36 @@ define(function(require) {
 
 	    // Place value
 	    this.setValue(this.value);
+			console.log(this.value);
 	    _.defer(_.bind(function() {
 	    	// Initialize the editor
 	    	var textarea = this.$el[0];
 	    	this.editor = CKEDITOR.replace(textarea, {
-	    		toolbar: [
-            { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'ShowBlocks' ] },
-            { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
-            { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll' ] },
-            { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv' ] },
-            {name: 'direction', items: ['BidiLtr', 'BidiRtl']},
-            '/',
-            { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'] },
-            { name: 'styles', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
-            { name: 'links', items: [ 'Link', 'Unlink' ] },
-            { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
-            { name: 'insert', items: [ 'SpecialChar', 'Table' ] },
-            { name: 'tools', items: [  ] },
-            { name: 'others', items: [ '-' ] }
-          ],
           extraAllowedContent: 'span(*)',
           disableNativeSpellChecker: false
         });
+
+				CKEDITOR.config.toolbarGroups = [
+					{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+					{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+					{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+					{ name: 'forms', groups: [ 'forms' ] },
+					{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+					'/',
+					{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+					{ name: 'links', groups: [ 'links' ] },
+					{ name: 'insert', groups: [ 'insert' ] },
+					'/',
+					{ name: 'styles', groups: [ 'styles' ] },
+					{ name: 'colors', groups: [ 'colors' ] },
+					{ name: 'tools', groups: [ 'tools' ] },
+					{ name: 'others', groups: [ 'others' ] },
+					{ name: 'about', groups: [ 'about' ] }
+				];
+
+				CKEDITOR.config.removeButtons = 'Flash,Language,Save,NewPage,Print,Preview,Templates,Scayt,Checkbox,Form,Radio,TextField,Textarea,Select,Button,HiddenField,ImageButton,Font,FontSize,About';
+
+				CKEDITOR.config.allowedContent = true;
 
 	    }, this));
 
@@ -186,14 +167,15 @@ define(function(require) {
 		if (!value && typeof this.schema.default !== 'undefined') {
       value = this.schema.default;
     }
-    
+
     this.$el.val(value);
 	}
 
 	Backbone.Form.editors.TextArea.prototype.getValue = function() {
+		console.log(this.editor.getData());
 		return this.editor.getData().replace(/[\t\n]/g, '');
 	}
-  
+
   Backbone.Form.editors.TextArea.prototype.remove = function() {
     this.editor.removeAllListeners();
     CKEDITOR.remove(this.editor);
@@ -209,17 +191,19 @@ define(function(require) {
 
 	    //Collect errors from schema validation
 	    // !!!OVERRIDE Passing in validate:false will stop the validation of the backbone forms validators
-	    if (!options.skipModelValidate) {
-			_.each(fields, function(field) {
-				var error = field.validate();
-				if (error) {
-					if(field.schema.title) {
-						error.title = field.schema.title;
-					}
-					errors[field.key] = error;
-				}
-			});
-	    }
+	    // if (!options.skipModelValidate) {
+			// 	console.log(fields);
+			// _.each(fields, function(field) {
+			// 	console.log(field);
+			// 	var error = field.validate();
+			// 	if (error) {
+			// 		if(field.schema.title) {
+			// 			error.title = field.schema.title;
+			// 		}
+			// 		errors[field.key] = error;
+			// 	}
+			// });
+	    // }
 
 	    //Get errors from default Backbone model validator
 		if (!options.skipModelValidate && model && model.validate) {
