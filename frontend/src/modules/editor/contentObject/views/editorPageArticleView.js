@@ -93,7 +93,7 @@ define(function(require){
       var model = new BlockModel();
       model.save({
         title: Origin.l10n.t('app.placeholdernewblock'),
-        displayTitle: Origin.l10n.t('app.placeholdernewblock'),
+        displayTitle: '',
         body: '',
         _parentId: this.model.get('_id'),
         _courseId: Origin.editor.data.course.get('_id'),

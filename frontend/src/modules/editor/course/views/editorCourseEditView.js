@@ -81,6 +81,7 @@ define(function(require) {
       var articleModel = new ArticleModel({
         _courseId: pageModel.get('_courseId'),
         _parentId: pageModel.get('_id'),
+        displayTitle: '',
         _type: 'article'
       });
       articleModel.save(null, {
@@ -93,6 +94,7 @@ define(function(require) {
       var blockModel = new BlockModel({
         _courseId: articleModel.get('_courseId'),
         _parentId: articleModel.get('_id'),
+        displayTitle: '',
         _type: 'block',
         layoutOptions: [
           { type: 'left', name: 'app.layoutleft', pasteZoneRenderOrder: 2 },

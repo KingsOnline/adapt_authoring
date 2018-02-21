@@ -104,7 +104,7 @@ define(function(require){
       event && event.preventDefault();
       (new ArticleModel()).save({
         title: Origin.l10n.t('app.placeholdernewarticle'),
-        displayTitle: Origin.l10n.t('app.placeholdernewarticle'),
+        displayTitle: '',
         body: '',
         _parentId: this.model.get('_id'),
         _courseId: Origin.editor.data.course.get('_id'),
