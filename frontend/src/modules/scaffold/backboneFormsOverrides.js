@@ -127,7 +127,6 @@ define(function(require) {
 
 	    // Place value
 	    this.setValue(this.value);
-			console.log(this.value);
 	    _.defer(_.bind(function() {
 	    	// Initialize the editor
 	    	var textarea = this.$el[0];
@@ -157,6 +156,7 @@ define(function(require) {
 				CKEDITOR.config.removeButtons = 'Flash,Language,Save,NewPage,Print,Preview,Templates,Scayt,Checkbox,Form,Radio,TextField,Textarea,Select,Button,HiddenField,ImageButton,Font,FontSize,About';
 
 				CKEDITOR.config.allowedContent = true;
+				CKEDITOR.config.extraPlugins = 'pasteFromGoogleDoc';
 
 	    }, this));
 
