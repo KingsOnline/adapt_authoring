@@ -172,7 +172,6 @@ define(function(require) {
 	}
 
 	Backbone.Form.editors.TextArea.prototype.getValue = function() {
-		console.log(this.editor.getData());
 		return this.editor.getData().replace(/[\t\n]/g, '');
 	}
 
