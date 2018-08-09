@@ -1,6 +1,6 @@
 # King's Online Adapt
 
-Welcome to [King's Online's](https://twitter.com) soft fork of the Adapt Authoring Tool.
+Welcome to [King's Online's](https://twitter.com/kingsonline) soft fork of the Adapt Authoring Tool.
 
 ## Why maintain a soft fork?
 
