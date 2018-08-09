@@ -1,41 +1,30 @@
-# Adapt Authoring Tool
+# King's Online Adapt
 
-[![Build Status](https://secure.travis-ci.org/adaptlearning/adapt_authoring.png)](http://travis-ci.org/adaptlearning/adapt_authoring) [![Join the chat at https://gitter.im/adaptlearning/adapt_authoring](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/adaptlearning/adapt_authoring?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Welcome to [King's Online's](https://twitter.com) soft fork of the Adapt Authoring Tool.
 
-Adapt is a free and easy to use framework and authoring tool that creates fully responsive, multi-device, HTML5 e-learning content.
+## Why maintain a soft fork?
 
-## What Does It Do?
+We want to create the best e-Learning Authoring Tool in the world, that both makes beautiful courses but makes the job of our production team as smooth as possible.
 
-The Adapt authoring tool is a web-based user interface for the [Adapt Framework](https://github.com/adaptlearning/adapt_framework). Use it to create responsive, single-version HTML5 e-learning courses for delivery on a web server or SCORM-compliant learning management system.
+We found several enhancements that we can make to reach this goal. Some of which are specific to our workflows. Others took too long to get merged. These changes generally are either cosmetic, affect libraries the Adapt Authoring Tool uses (CKEditor and ACE editor), or change default settings.
 
-Interested? [See what Adapt can do.](https://community.adaptlearning.org/demo2/index.html)
+Our Dev team is still creating issues and PRs for the Adapt Authoring Tool on their own Github accounts.
 
-## Features
+We recommend creating Adapt Framework themes out of [adapt-theme-ko](https://github.com/KingsOnline/adapt-theme-ko) to take advantage of some of the features.
 
-* Web application built on Node.js, Backbone.js, and MongoDB for creating, editing and publishing Adapt content
-* Supports all core extensions and components
-* Allows uploading and linking of course assets
+## version 0.5.0 changes
 
-## Full Documentation
-[Visit the wiki](https://github.com/adaptlearning/adapt_authoring/wiki) for full documentation, including [installation](https://github.com/adaptlearning/adapt_authoring/wiki/Installing-the-Authoring-Tool), course authoring, developer guides, and other information.
+To see all the changes introduced in version 0.5.0 of the Adapt Authoring Tool see here - https://github.com/adaptlearning/adapt_authoring/releases/tag/v0.5.0
 
-## Communication
-+ [Twitter: @AdaptLearning](https://twitter.com/adaptlearning)
-+ [Gitter](https://gitter.im/orgs/adaptlearning/rooms)
-+ [Community Site](https://community.adaptlearning.org/)
-+ [Technical Forum](https://community.adaptlearning.org/mod/forum/view.php?id=4)
-+ [Bugs / Feature Requests](https://github.com/adaptlearning/adapt_authoring/issues)
-+ [Responsive e-Learning Forum](https://community.adaptlearning.org/mod/forum/view.php?id=56)
+###  Added
 
-## Contributing to Adapt
+*  The code editor (Ace Editor) now expands and shrinks between 15 and 45 lines
+*  The text editor has additional plugins that enhance pasting from Google Docs and Word. This stops the need to format after pasting from these sources
+*  CKEditor's config file has been changed, see [here](https://github.com/KingsOnline/adapt_authoring/blob/master/frontend/src/libraries/ckeditor/config.js)
 
-See [Contributing to the Adapt authoring tool](https://github.com/adaptlearning/adapt_authoring/blob/master/CONTRIBUTING.md).
+###  Removed
 
-
-## Troubleshooting, Bugs, and Feedback
-+ For help with troubleshooting, visit the [Technical Discussion Forum](https://community.adaptlearning.org/mod/forum/view.php?id=4).
-+ To report a bug, please [GitHub Issues](https://github.com/adaptlearning/adapt_authoring/issues).
-+ To provide feedback, please use the [GitHub Issues](https://github.com/adaptlearning/adapt_authoring/issues).
+*  Removed the default value of displayTitle in blocks.
 
 ## License
 <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a>  Adapt is licensed under the [GNU General Public License, Version 3](https://github.com/adaptlearning/adapt_authoring/blob/master/LICENSE).
