@@ -19,3 +19,17 @@ CKEDITOR.editorConfig = function( config ) {
 };
 
 CKEDITOR.dtd.$removeEmpty.span = 1;
+
+CKEDITOR.on( 'toDataFormat', function( evt ) {
+    var filter = new CKEDITOR.htmlParser.filter( {
+        elements: {
+            p: function( el ) {
+                if ( el.parent && el.parent.name == 'li' ) {
+                    delete el.name; // This removes the element and leaves its content.
+                }
+            }
+        }
+    } );
+
+    filter.applyTo( evt.data.dataValue );
+}, null, 12 );
