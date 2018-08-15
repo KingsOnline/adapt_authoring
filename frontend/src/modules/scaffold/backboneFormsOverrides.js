@@ -113,7 +113,7 @@ define(function(require) {
 			} else {
 				remove();
 			}
-		};
+		};		
 
 	// Used to setValue with defaults
 
